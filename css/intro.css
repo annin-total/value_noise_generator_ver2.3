@@ -1,0 +1,300 @@
+@import url("https://fonts.googleapis.com/css2?family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Istok Web", sans-serif;
+  color: #000;
+  transition: all 0.3s;
+}
+
+h1,
+h2,
+h3,
+p,
+a,
+span {
+  font-feature-settings: "palt" on;
+}
+
+#noiseCanvas {
+  position: fixed;
+}
+
+#noiseImage {
+  position: fixed;
+  z-index: -2;
+  top: 0;
+}
+
+/* イントロ */
+:root {
+  --intro-font-color: #232323;
+}
+.intro-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  top: 0;
+  color: var(--intro-font-color);
+  mix-blend-mode: difference;
+  overflow: hidden;
+}
+
+.intro-title {
+  position: absolute;
+  /* top: 21%; */
+  top: 50%;
+  transform: translateY(-50%);
+  /* background-color: #aba370; */
+  left: 10%;
+  width: 500px;
+  height: 500px;
+  /* margin-top: 18px; */
+  margin-top: 44px;
+  /* margin-top: 45px; */
+  z-index: 1;
+}
+
+.text-box1 {
+  position: absolute;
+  /* background-color: blue; */
+  width: fit-content;
+  height: 46px;
+  overflow: hidden;
+}
+
+.intro-title h1 {
+  font-size: 44px;
+  font-weight: 700;
+  z-index: 3;
+}
+
+.text-box2 {
+  position: absolute;
+  top: 43px;
+  /* background-color: coral; */
+  width: fit-content;
+  height: 78px;
+  overflow: hidden;
+}
+
+.intro-title h1 span {
+  font-size: 75px;
+  font-weight: 700;
+}
+
+.text-box3 {
+  position: absolute;
+  top: 160px;
+  /* background-color: blue; */
+  width: fit-content;
+  height: 23px;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.intro-explain h2 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.text-box4,
+.text-box5,
+.text-box6,
+.text-box7 {
+  position: absolute;
+  top: 192px;
+  /* background-color: blue; */
+  width: fit-content;
+  height: 23px;
+  z-index: 3;
+  overflow: hidden;
+}
+
+.text-box5 {
+  top: 218px;
+}
+.text-box6 {
+  top: 244px;
+}
+.text-box7 {
+  top: 270px;
+}
+
+.intro-explain p {
+  /* position: absolute; */
+  /* top: 194px; */
+  font-size: 18px;
+  font-weight: 400;
+  /* z-index: 3; */
+}
+
+.original-br {
+  display: none;
+}
+
+.text-box8 {
+  position: absolute;
+  top: 330px;
+  /* top: 360px; */
+  /* top: 370px; */
+  left: 376px;
+  /* left: 368px; */
+  width: 130px;
+  height: 20px;
+  /* background-color: coral; */
+  overflow: hidden;
+}
+
+.intro-start-btn {
+  cursor: pointer;
+  position: relative;
+}
+
+.intro-start-btn button {
+  font-size: 18px;
+  font-weight: 700;
+  z-index: 4;
+  color: var(--intro-font-color);
+  transition: all 0.3s;
+}
+
+.intro-start-btn button:hover {
+  color: #aba370;
+}
+
+/* 下線 */
+/* .intro-start-btn::before {
+  content: "";
+  display: inline-block;
+  width: 98%;
+  height: 1px;
+  background-color: var(--intro-font-color);
+  position: absolute;
+  bottom: 3px;
+  left: 2px;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.intro-start-btn:hover::before {
+  opacity: 1;
+} */
+
+.intro-start-btn button:after {
+  font-family: "FontAwesome";
+  content: "\f105";
+  position: absolute;
+  padding-top: 3px;
+  /* top: 1px; */
+  right: -23px;
+  font-size: 17px;
+  font-weight: 100;
+  transition: all 0.3s;
+  color: var(--intro-font-color);
+}
+
+.intro-start-btn button:hover:after {
+  right: -29px;
+  color: #aba370;
+}
+
+/* イントロキャンバス */
+.intro-container-main {
+  opacity: 0;
+  visibility: 0;
+  position: fixed;
+}
+
+#main-intro {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  top: 50%;
+  right: 10%;
+  transform: translate(-0%, -50%);
+  z-index: -1;
+}
+
+.cut-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 0;
+  right: 0;
+  top: 0;
+}
+
+.cutout {
+  width: 500px;
+  height: 500px;
+  border-radius: 20px;
+  border-radius: 15px;
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  transform: translate(-0%, -50%);
+  background-color: transparent;
+  box-shadow: 0 0 0 9999px rgba(255, 255, 255, 1);
+}
+
+/* ラインアニメーション */
+.line-container {
+  display: none;
+}
+
+.line-box,
+.line-box2 {
+  width: 150px;
+  height: 110vh;
+  position: fixed;
+  left: 4%;
+  top: -5vh;
+  /* z-index: 2; */
+}
+
+.line-box2 {
+  left: 7%;
+}
+
+.line1,
+.line2 {
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  /* background-color: rgba(201, 201, 201, 0.3); */
+  background-color: #d5d2be;
+  left: 0px;
+  transition: left 6.4s linear;
+  /* animation-name: line-animation;
+  animation-duration: 2.6s;
+  animation-iteration-count: infinite; */
+  z-index: 2;
+  opacity: 0.5;
+}
+
+.line2 {
+  transition: left 5.1s linear;
+  opacity: 0.4;
+  left: 60px;
+  animation-delay: 0.6s;
+}
+
+@keyframes line-animation {
+  0% {
+    background-color: rgb(201, 201, 201);
+  }
+  50% {
+    background-color: #d5d2be;
+  }
+  100% {
+    background-color: rgb(201, 201, 201);
+  }
+}
+
+@media screen and (max-width: 885px) {
+  .line-container {
+    display: none;
+  }
+}

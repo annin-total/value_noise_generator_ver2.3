@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://use.fontawesome.com/releases/v6.2.0/css/all.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
+    <link rel="stylesheet" href="./css/intro.css" />
+    <link rel="stylesheet" href="./css/loading.css" />
+  </head>
+  <body>
+    <!-- 開始ローダー -->
+    <div id="intro-loading" class="intro-loading-overlay">
+      <div class="intro-loading-container">
+        <div class="sk-chaseI">
+          <div class="sk-chase-dotI"></div>
+          <div class="sk-chase-dotI"></div>
+          <div class="sk-chase-dotI"></div>
+          <div class="sk-chase-dotI"></div>
+          <div class="sk-chase-dotI"></div>
+          <div class="sk-chase-dotI"></div>
+        </div>
+      </div>
+    </div>
+    <!-- イントロエリア -->
+    <div class="intro-container">
+      <!-- 本体のコピー -->
+      <div class="intro-container-main">
+        <!-- サイドバー -->
+        <div id="sidebar">
+          <!-- 名称 -->
+          <div class="generator-name">
+            <h2>Value Noise<br /><span>Generator</span></h2>
+          </div>
+          <!-- サイズ設定 -->
+          <div class="size-setting accordion-item">
+            <div class="accordion-header">
+              <h3>Size Setting</h3>
+              <span class="icon"></span>
+            </div>
+            <div class="accordion-content">
+              <label for="size"
+                >Size:
+                <span class="font12px"
+                  ><span class="min-max-value">100~1000</span></span
+                ></label
+              >
+              <input
+                type="number"
+                id="size"
+                placeholder="Size (default: 600)"
+                value="600"
+                step="50"
+                pattern="^[a-zA-Z0-9]+$"
+                min="100"
+                max="1000"
+              />
+            </div>
+          </div>
+          <!-- パラメータ設定 -->
+          <div class="canvas-setting accordion-item">
+            <div class="accordion-header">
+              <h3>Canvas Setting</h3>
+              <span class="icon"></span>
+            </div>
+            <div class="accordion-content">
+              <div class="canvas-setting-title">
+                <label for="scale"
+                  >Scale:
+                  <span class="font12px"
+                    ><span class="min-max-value">1~201</span> or</span
+                  ></label
+                >
+                <button
+                  onclick="randomizeScaleClick()"
+                  class="black-btn black-btn-min"
+                >
+                  Randomize
+                </button>
+              </div>
+              <input
+                type="number"
+                id="scale"
+                placeholder="Scale (default: 50)"
+                value="50"
+                step="10"
+                pattern="^[a-zA-Z0-9]+$"
+                min="1"
+                max="201"
+              />
+              <div class="canvas-setting-title">
+                <label for="octaves"
+                  >Octaves:
+                  <span class="font12px"
+                    ><span class="min-max-value">1~15</span> or</span
+                  ></label
+                >
+                <button
+                  onclick="randomizeOctavesClick()"
+                  class="black-btn black-btn-min"
+                >
+                  Randomize
+                </button>
+              </div>
+              <input
+                type="number"
+                id="octaves"
+                placeholder="Octaves (default: 4)"
+                value="4"
+                pattern="^[a-zA-Z0-9]+$"
+                min="1"
+                max="15"
+              />
+              <div class="canvas-setting-title">
+                <label for="persistence"
+                  >Persistence:
+                  <span class="font12px"
+                    ><span class="min-max-value">0.1~3</span> or</span
+                  ></label
+                >
+                <button
+                  onclick="randomizePersistenceClick()"
+                  class="black-btn black-btn-min"
+                >
+                  Randomize
+                </button>
+              </div>
+              <input
+                type="number"
+                id="persistence"
+                placeholder="Persistence (default: 0.5)"
+                value="0.5"
+                step="0.1"
+                pattern="^[a-zA-Z0-9]+$"
+                min="0.1"
+                max="3"
+              />
+            </div>
+          </div>
+          <!-- カラー設定 -->
+          <div class="color-setting accordion-item">
+            <div class="accordion-header">
+              <h3>Color Setting</h3>
+              <span class="icon"></span>
+            </div>
+            <div class="accordion-content">
+              <div id="colorInputsContainer">
+                <label>Color Palettes</label>
+                <div id="colorInputs"></div>
+              </div>
+              <button
+                onclick="addColorInputClick()"
+                id="addColorBtn"
+                class="black-btn black-btn-min"
+                tooltip="No double click, overload site."
+              >
+                Add Color
+              </button>
+              <button
+                onclick="deleteColorInputClick()"
+                id="deleteColorBtn"
+                class="black-btn black-btn-min"
+              >
+                Delete Color
+              </button>
+              <button
+                onclick="randomizeColorsClick()"
+                class="black-btn black-btn-min"
+              >
+                Randomize Color
+              </button>
+            </div>
+          </div>
+          <div class="border"></div>
+          <!-- 一般設定 -->
+          <div class="general-setting">
+            <button onclick="randomizeAllClick()" class="black-btn">
+              Randomize All
+            </button>
+            <button onclick="resetValuesClick()" class="black-btn">
+              Reset Values
+            </button>
+            <button onclick="saveImage()" class="black-btn">Save Image</button>
+          </div>
+        </div>
+        <!-- キャンバス -->
+        <!-- <div id="main">
+          <canvas id="noiseCanvas"></canvas>
+          <img src="" alt="" id="noiseImage" />
+        </div> -->
+      </div>
+      <!-- イントロコンテンツ -->
+      <div class="intro-title">
+        <div class="text-box1">
+          <h1>Value Noise</h1>
+        </div>
+        <div class="text-box2">
+          <h1><span>Generator</span></h1>
+        </div>
+        <div class="intro-explain">
+          <div class="text-box3">
+            <h2>Paint your imagination with noise.</h2>
+          </div>
+          <div class="text-box4">
+            <p>
+              Value Noise Generator is a tool that creates colorful, natural,
+            </p>
+          </div>
+          <div class="text-box5">
+            <p>
+              and beautiful noise images, bringing your imagination to life.
+            </p>
+          </div>
+          <div class="text-box6">
+            <p>You can freely adjust parameters to generate unique visuals.</p>
+          </div>
+          <div class="text-box7">
+            <p>Unleash your creativity and give it a try.</p>
+          </div>
+        </div>
+        <div class="text-box8">
+          <a href="./index.html" class="intro-start-btn">
+            <button>Get Started</button>
+          </a>
+        </div>
+      </div>
+      <div id="main-intro">
+        <canvas id="noiseCanvas"></canvas>
+        <!-- <img src="./img/intro-img.jpg" alt="" id="noiseImage" /> -->
+        <img src="" alt="" id="noiseImage" />
+      </div>
+      <div class="cut-container">
+        <div class="cutout"></div>
+      </div>
+      <div class="line-container">
+        <div class="line-box">
+          <div class="line1"></div>
+        </div>
+        <div class="line-box2">
+          <div class="line2"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <!-- <script src="./script/accordion.js"></script> -->
+    <script src="./script/line-animation.js"></script>
+    <script src="./script/script2.js"></script>
+    <script src="./script/intro.js" id="introJs"></script>
+    <script src="./script/loading.js"></script>
+  </body>
+</html>
