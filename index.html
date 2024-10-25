@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
+    <link rel="stylesheet" href="./css/loading.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/use.css" />
+  </head>
+  <body>
+    <!-- 開始ローダー -->
+    <div id="intro-loading" class="intro-loading-overlay">
+      <div class="intro-loading-container">
+        <div class="sk-chaseI">
+          <div class="sk-chase-dotI"></div>
+          <div class="sk-chase-dotI"></div>
+          <div class="sk-chase-dotI"></div>
+          <div class="sk-chase-dotI"></div>
+          <div class="sk-chase-dotI"></div>
+          <div class="sk-chase-dotI"></div>
+        </div>
+      </div>
+    </div>
+    <!-- 関数実行中ローダー -->
+    <div id="loading" class="loading-overlay">
+      <div class="loading-container">
+        <div class="sk-chase">
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+        </div>
+      </div>
+    </div>
+    <!-- ヘッダー -->
+    <div class="btn-area">
+      <div class="menu-btn">How to Use ?</div>
+    </div>
+    <div class="header-container">
+      <a href="./intro.html" class="introduction-link">Introduction</a>
+    </div>
+    <!-- メイン -->
+    <div class="container">
+      <!-- サイドバー -->
+      <div id="sidebar" class="sidebar">
+        <!-- 名称 -->
+        <div class="generator-name">
+          <h2>Value Noise<br /><span>Generator</span></h2>
+        </div>
+        <!-- サイズ設定 -->
+        <div class="size-setting accordion-item">
+          <div class="accordion-header">
+            <h3>Size Setting</h3>
+            <span class="icon"></span>
+          </div>
+          <div class="accordion-content">
+            <label for="size"
+              >Size:
+              <span class="font12px"
+                ><span class="min-max-value">100~1000</span></span
+              ></label
+            >
+            <input
+              type="number"
+              id="size"
+              placeholder="Size (default: 600)"
+              value="600"
+              step="50"
+              pattern="^[a-zA-Z0-9]+$"
+              min="100"
+              max="1000"
+            />
+          </div>
+        </div>
+        <!-- パラメータ設定 -->
+        <div class="canvas-setting accordion-item">
+          <div class="accordion-header">
+            <h3>Canvas Setting</h3>
+            <span class="icon"></span>
+          </div>
+          <div class="accordion-content">
+            <div class="canvas-setting-title">
+              <label for="scale"
+                >Scale:
+                <span class="font12px"
+                  ><span class="min-max-value">1~201</span> or</span
+                ></label
+              >
+              <button
+                onclick="randomizeScaleClick()"
+                class="black-btn black-btn-min"
+              >
+                Randomize
+              </button>
+            </div>
+            <input
+              type="number"
+              id="scale"
+              placeholder="Scale (default: 50)"
+              value="50"
+              step="10"
+              pattern="^[a-zA-Z0-9]+$"
+              min="1"
+              max="201"
+            />
+            <div class="canvas-setting-title">
+              <label for="octaves"
+                >Octaves:
+                <span class="font12px"
+                  ><span class="min-max-value">1~15</span> or</span
+                ></label
+              >
+              <button
+                onclick="randomizeOctavesClick()"
+                class="black-btn black-btn-min"
+              >
+                Randomize
+              </button>
+            </div>
+            <input
+              type="number"
+              id="octaves"
+              placeholder="Octaves (default: 4)"
+              value="4"
+              pattern="^[a-zA-Z0-9]+$"
+              min="1"
+              max="15"
+            />
+            <div class="canvas-setting-title">
+              <label for="persistence"
+                >Persistence:
+                <span class="font12px"
+                  ><span class="min-max-value">0.1~3</span> or</span
+                ></label
+              >
+              <button
+                onclick="randomizePersistenceClick()"
+                class="black-btn black-btn-min"
+              >
+                Randomize
+              </button>
+            </div>
+            <input
+              type="number"
+              id="persistence"
+              placeholder="Persistence (default: 0.5)"
+              value="0.5"
+              step="0.1"
+              pattern="^[a-zA-Z0-9]+$"
+              min="0.1"
+              max="3"
+            />
+          </div>
+        </div>
+        <!-- カラー設定 -->
+        <div class="color-setting accordion-item">
+          <div class="accordion-header">
+            <h3>Color Setting</h3>
+            <span class="icon"></span>
+          </div>
+          <div class="accordion-content">
+            <div id="colorInputsContainer">
+              <label>Color Palettes</label>
+              <div id="colorInputs"></div>
+            </div>
+            <div class="color-setting-btn">
+              <button
+                onclick="addColorInputClick()"
+                id="addColorBtn"
+                class="black-btn black-btn-min"
+                tooltip="Please wait between clicks."
+              >
+                Add Color
+              </button>
+              <button
+                onclick="deleteColorInputClick()"
+                id="deleteColorBtn"
+                class="black-btn black-btn-min"
+              >
+                Delete Color
+              </button>
+              <button
+                onclick="randomizeColorsClick()"
+                class="black-btn black-btn-min"
+              >
+                Randomize Color
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="border"></div>
+        <!-- 一般設定 -->
+        <div class="general-setting">
+          <button onclick="randomizeAllClick()" class="black-btn">
+            Randomize All
+          </button>
+          <button onclick="resetValuesClick()" class="black-btn">
+            Reset Values
+          </button>
+          <button onclick="saveImage()" class="black-btn">Save Image</button>
+        </div>
+      </div>
+      <!-- キャンバス -->
+      <div id="main">
+        <canvas id="noiseCanvas"></canvas>
+        <img src="" alt="" id="noiseImage" />
+      </div>
+    </div>
+    <!-- 保存確認ポップアップ -->
+    <div class="popup-layer" onclick="cancelSave()"></div>
+    <div id="savePopup">
+      <span>Are you sure?</span>
+      <!-- <span>Do you want to save the image?</span> -->
+      <p>
+        This action hasn't been completed yet. Going ahead will save the
+        generated noise image to a local folder on your device.
+      </p>
+      <div class="save-confirm">
+        <button onclick="cancelSave()" class="black-btn">Cancel</button>
+        <button onclick="confirmSave()" class="black-btn">Save</button>
+      </div>
+    </div>
+    <!-- HowToUseページ -->
+    <div class="howtouse-container">
+      <div class="howtouse-title">
+        <div class="howtouse-title-main">
+          <span class="howtouse-title1">How to use Value Noise Generator</span>
+        </div>
+        <div class="howtouse-title-caption">
+          <div class="caption-area">
+            <div class="caption">
+              <span
+                >To use the Value Noise Generator, start by adjusting parameters
+                such as scale and octaves to define the noise pattern.
+                Select</span
+              >
+            </div>
+            <div class="caption">
+              <span
+                >color palettes to enhance the visual appeal. Set persistence to
+                control the texture details of your image. Once satisfied,
+                generate</span
+              >
+            </div>
+            <div class="caption">
+              <span
+                >and save your creation. Feel free to experiment with different
+                settings for varied results and unique visuals.</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="howtouse-wrapper">
+        <table class="howtouse-table">
+          <tr class="howtouse-tr">
+            <td>text1A</td>
+            <td>text1B</td>
+            <td>text1C</td>
+            <td>text1D</td>
+          </tr>
+          <tr class="howtouse-tr tr1">
+            <td><span>Size</span></td>
+            <td><span>Size Setting</span></td>
+            <td><span>default / 600px</span></td>
+            <td>
+              <p>
+                <span>Explanation</span><br />
+                Image size refers to the dimensions and file size of a digital
+                image. Measured in pixels for width and height, it determines
+                visual quality and detail. Larger sizes offer higher resolution
+                but require more storage space. Adjusting image size is crucial
+                for web optimization and printing.
+              </p>
+            </td>
+          </tr>
+          <tr class="howtouse-tr tr2">
+            <td><span>Scale</span></td>
+            <td><span>Canvas Setting</span></td>
+            <td><span>default / 50</span></td>
+            <td>
+              <p>
+                <span>Explanation</span><br />
+                In Perlin noise, "Scale" refers to the frequency or zoom level
+                of the noise pattern. A larger scale produces broader, smoother
+                variations, while a smaller scale results in more detailed,
+                granular patterns. Adjusting the scale allows designers to
+                control the overall appearance and complexity of the generated
+                noise.
+              </p>
+            </td>
+          </tr>
+          <tr class="howtouse-tr tr3">
+            <td><span>Octaves</span></td>
+            <td><span>Canvas Setting</span></td>
+            <td><span>default / 4</span></td>
+            <td>
+              <p>
+                <span>Explanation</span><br />
+                In Perlin noise, "Octave" refers to a layer of noise added to
+                create more complex patterns. Each octave has a higher frequency
+                and lower amplitude than the previous one. By combining multiple
+                octaves, designers can achieve more natural-looking textures
+                with varying levels of detail and roughness.
+              </p>
+            </td>
+          </tr>
+          <tr class="howtouse-tr tr4">
+            <td><span>Persistence</span></td>
+            <td><span>Canvas Setting</span></td>
+            <td><span>default / 0.5</span></td>
+            <td>
+              <p>
+                <span>Explanation</span><br />
+                Randomize, a versatile verb, means to arrange or select in a In
+                Perlin noise, "Persistence" determines how quickly the amplitude
+                decreases for each octave. A higher persistence value results in
+                more detailed, rougher textures, as it maintains the influence
+                of higher frequency octaves. Lower persistence creates smoother,
+                more subtle variations in the noise pattern.
+              </p>
+            </td>
+          </tr>
+          <tr class="howtouse-tr tr5">
+            <td><span>Color Pallets</span></td>
+            <td><span>Color Setting</span></td>
+            <td><span>default / #000, #fff</span></td>
+            <td>
+              <p>
+                <span>Explanation</span><br />
+                In Perlin noise, "color" refers to the application of color
+                gradients to the noise pattern. By mapping noise values to color
+                ranges, designers can create visually appealing textures and
+                landscapes. This technique is often used in procedural
+                generation for terrains, clouds, and abstract art.
+              </p>
+            </td>
+          </tr>
+          <tr class="howtouse-tr tr6">
+            <td><span>Randomize</span></td>
+            <td><span>General Setting</span></td>
+            <td><span>default / none</span></td>
+            <td>
+              <p>
+                <span>Explanation</span><br />
+                Randomize, a versatile verb, means to arrange or select in a
+                random manner. It's widely used in statistics, scientific
+                research, and game design. Researchers randomize study
+                participants to reduce bias, while game developers use it to
+                enhance replay value and unpredictability.
+              </p>
+            </td>
+          </tr>
+          <tr class="howtouse-tr">
+            <td>text8A</td>
+            <td>text8B</td>
+            <td>text8C</td>
+            <td>text8D</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="./script/script.js"></script>
+    <script src="./script/use-content.js"></script>
+    <script src="./script/use-menu.js"></script>
+    <script src="./script/index-loading.js"></script>
+  </body>
+</html>
