@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
           accordion();
         },
       },
-      "+=1.5"
+      "+=0.8"
     )
     .to(introLoadingOverlay, {
       duration: 0.01,
